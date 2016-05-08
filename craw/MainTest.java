@@ -8,8 +8,11 @@ public class MainTest {
 		// TODO Auto-generated method stub
 		String url="http://www.zhihu.com/explore/recommendations";
 		String result=new Spider().SendGet(url);
-		ArrayList<Zhihu> zhi=new Spider().GetZhihu(result);
-		System.out.println(zhi);
+		ArrayList<Zhihu> zhi=new Spider().getRec(result);
+		for (Zhihu zhihu : zhi) {  
+            FileReaderWriter.writeIntoFile(zhihu.writeString(),  
+                    "E:/test.txt", true);  
+        }  
 	}
 
 }

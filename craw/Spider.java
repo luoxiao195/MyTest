@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class Spider {
 	static String getEdit="question_link.+?>(.+?)<";
-	static String getUrl="question_link.+?>(.+?)<";
+	static String getUrl="<h2>.+?question_link.+?href=\"(.+?)\".+?</h2>";
 	static String SendGet(String url){
 		String result="";
 		BufferedReader in=null;
@@ -43,36 +43,16 @@ public class Spider {
 		}
 		return result;
 	}
-	static ArrayList<String> RegexString(String targetStr,String patternStr)
+	static ArrayList<Zhihu> getRec(String content)
 	{
-		Pattern pattern=Pattern.compile(patternStr);
-		Matcher matcher=pattern.matcher(targetStr);
-		ArrayList<String> result=new ArrayList<String>();
-		while(matcher.find()){
-			result.add(matcher.group(1));
-			
+		ArrayList<Zhihu>result=new ArrayList<Zhihu>();
+		Pattern pattern=Pattern.compile(getUrl);
+		Matcher matcher=pattern.matcher(content);
+		while(matcher.find())
+		{
+			Zhihu zhihuTmp=new Zhihu(matcher.group(1));
+			result.add(zhihuTmp);
 		}
-			
-			
-		return result;
-	}
-	static ArrayList<Zhihu> GetZhihu(String content)
-	{
-		ArrayList<Zhihu> result=new ArrayList<Zhihu>();
-		
-		Pattern questionPattern=Pattern.compile(getEdit);
-		Matcher questionMatcher=questionPattern.matcher(content);
-		Pattern urlPattern=Pattern.compile(getUrl);
-		Matcher urlMatcher=urlPattern.matcher(content);
-		boolean ifFind=questionMatcher.find()&&urlMatcher.find();
-		while(ifFind){
-			Zhihu zhihuTemp=new Zhihu();
-			zhihuTemp.question=questionMatcher.group(1);
-			zhihuTemp.zhihuUrl="http://www.zhihu.com"+urlMatcher.group(1);
-			result.add(zhihuTemp);
-			ifFind=questionMatcher.find()&&urlMatcher.find();
-		}
-		
 		return result;
 	}
 }
