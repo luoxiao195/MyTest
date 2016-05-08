@@ -4,10 +4,12 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TestBaidu {
+public class ZhihuEdit {
+	String Regex="question_link.+?>(.+?)<";			//获得知乎问题的正则
 	static String SendGet(String url){
 		String result="";
 		BufferedReader in=null;
@@ -40,12 +42,17 @@ public class TestBaidu {
 		}
 		return result;
 	}
-	static String RegexString(String targetStr,String patternStr)
+	static ArrayList<String> RegexString(String targetStr,String patternStr)
 	{
 		Pattern pattern=Pattern.compile(patternStr);
 		Matcher matcher=pattern.matcher(targetStr);
-		if(matcher.find())
-			return matcher.group(1);
-		return "nothing";
+		ArrayList<String> result=new ArrayList<String>();
+		while(matcher.find()){
+			result.add(matcher.group(1));
+			
+		}
+			
+			
+		return result;
 	}
 }
