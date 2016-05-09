@@ -10,6 +10,7 @@ import org.apache.http.util.EntityUtils;
 public class TestClientGet extends Thread{
 	HttpClient client=HttpClients.createDefault();
 	
+	@Override
 	public void run()
 	{
 		HttpGet get=new HttpGet("http://www.baidu.com");

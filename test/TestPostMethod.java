@@ -15,6 +15,7 @@ import org.apache.http.util.EntityUtils;
 public class TestPostMethod extends Thread{
 	HttpClient client=HttpClients.createDefault();
 	
+	@Override
 	public void run()
 	{
 		HttpPost post=new HttpPost("http://fanyi.youdao.com/openapi.do");

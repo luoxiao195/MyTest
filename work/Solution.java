@@ -47,6 +47,7 @@ class FEntity implements Comparable<FEntity>{
 		this.num=num;
 		this.frequent=frequent;
 	}
+	@Override
 	public int compareTo(FEntity arg0)
 	{
 		if(frequent>arg0.frequent)

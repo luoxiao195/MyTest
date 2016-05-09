@@ -1,6 +1,6 @@
 package work;
 
-
+import leetcode.leetcode344;
 
 public class work {
 	public static void main(String[] args)
